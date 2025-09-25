@@ -1,36 +1,23 @@
 {
-    "name": "Stock Manager",
-    "short_name": "Stocker",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#520380",
-    "icons": [
-      {
-        "src": "/img/kayze-logo.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
-      {
-        "src": "/img/kayze-logo.png",
-        "type": "image/png",
-        "sizes": "512x512"
-      }
-    ],
-
-    "screenshots": [
-  {
-    "src": "/img/kayze-logo.png",
-    "sizes": "540x720",
-    "type": "image/png",
-    "form_factor": "wide"
-  },
-  {
-    "src": "/img/kayze-logo.png",
-    "sizes": "320x640",
-    "type": "image/png"
-  }
-]
-  }
-
-  
+  "name": "Shop Inventory Manager",
+  "short_name": "Shop Inventory",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/kayze-logo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/kayze-logo.png", 
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
