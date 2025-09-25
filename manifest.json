@@ -7,28 +7,28 @@
     "theme_color": "#520380",
     "icons": [
       {
-        "src": "/img/logo_kayze.jpg",
-        "type": "image/jpg",
+        "src": "/img/kayze-logo.png",
+        "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "/img/logo_kayze.jpg",
-        "type": "image/jpg",
+        "src": "/img/kayze-logo.png",
+        "type": "image/png",
         "sizes": "512x512"
       }
     ],
 
     "screenshots": [
   {
-    "src": "/img/logo_kayze.jpg",
+    "src": "/img/kayze-logo.png",
     "sizes": "540x720",
-    "type": "image/jpg",
+    "type": "image/png",
     "form_factor": "wide"
   },
   {
-    "src": "/img/logo_kayze.jpg",
+    "src": "/img/kayze-logo.png",
     "sizes": "320x640",
-    "type": "image/jpg"
+    "type": "image/png"
   }
 ]
   }
