@@ -7,20 +7,25 @@
     <link rel="stylesheet" href="style.css">
        <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="#520380">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <div class="container">
+     <div class="container">
         <div class="header">
-            <h1>🏪 Shop Inventory</h1>
-            <p>Manage your product prices easily</p>
+            <h1>Shop Inventory</h1>
+            <p>Product & Price Management</p>
         </div>
 
         <!-- Home Screen -->
         <div id="homeScreen" class="screen active">
             <div class="main-content">
-                <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search for products...">
+                <div id="intro-text">Welcome back</div>
                 
-                <div class="stats">
+                <div class="search-container">
+                    <input type="text" class="search-box" id="searchBox" placeholder="Search products...">
+                </div>
+                
+                <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-number" id="totalProducts">0</div>
                         <div class="stat-label">Products</div>
@@ -31,18 +36,22 @@
                     </div>
                 </div>
 
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="showScreen('addScreen')">
-                        ➕ Add New Product
+                <div class="action-grid">
+                    <button class="btn" onclick="showScreen('addScreen')">
+                        <div class="btn-icon"><i class="bi bi-plus-square-fill"></i></div>
+                        <div>Add Product</div>
                     </button>
-                    <button class="btn btn-secondary" onclick="showScreen('listScreen')">
-                        📋 View All Products
+                    <button class="btn" onclick="showScreen('listScreen')">
+                        <div class="btn-icon"><i class="bi bi-view-stacked"></i></div>
+                        <div>View All</div>
                     </button>
-                    <button class="btn btn-info" onclick="showScreen('editScreen')">
-                        ✏️ Quick Edit Prices
+                    <button class="btn" onclick="showScreen('editScreen')">
+                        <div class="btn-icon"><i class="bi bi-pencil-square"></i></div>
+                        <div>Edit Prices</div>
                     </button>
-                    <button class="btn btn-warning" onclick="showScreen('suppliersScreen')">
-                        👥 Suppliers List
+                    <button class="btn" onclick="showScreen('suppliersScreen')">
+                        <div class="btn-icon"><i class="bi bi-person-vcard-fill"></i></div>
+                        <div>Suppliers</div>
                     </button>
                 </div>
             </div>
@@ -51,47 +60,49 @@
         <!-- Add Product Screen -->
         <div id="addScreen" class="screen">
             <div class="main-content">
-                <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
-                <h2 style="margin-bottom: 20px; color: #333;">Add New Product</h2>
+                <div class="screen-header">
+                    <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
+                    <div class="screen-title">Add Product</div>
+                </div>
                 
                 <form id="addProductForm">
                     <div class="form-group">
                         <div class="image-upload" onclick="document.getElementById('imageInput').click()">
                             <div id="imagePreview">
-                                <div style="font-size: 3rem; margin-bottom: 10px;">📷</div>
-                                <div>Tap to add product image</div>
+                                <div class="upload-icon">📷</div>
+                                <div class="upload-text">Tap to add image</div>
                             </div>
                         </div>
                         <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage(this)">
                     </div>
 
                     <div class="form-group">
-                        <label for="productName">Product Name:</label>
+                        <label class="form-label" for="productName">Product Name</label>
                         <input type="text" id="productName" class="form-control" placeholder="Enter product name" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="productPrice">Current Price (₦):</label>
+                        <label class="form-label" for="productPrice">Price (₦)</label>
                         <input type="number" id="productPrice" class="form-control" placeholder="0.00" step="0.01" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="supplierName">Supplier Name:</label>
+                        <label class="form-label" for="supplierName">Supplier</label>
                         <input type="text" id="supplierName" class="form-control" placeholder="Supplier name" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="supplierPhone">Supplier Phone:</label>
+                        <label class="form-label" for="supplierPhone">Phone (Optional)</label>
                         <input type="tel" id="supplierPhone" class="form-control" placeholder="080XXXXXXXX">
                     </div>
 
                     <div class="form-group">
-                        <label for="productNotes">Notes (Optional):</label>
-                        <textarea id="productNotes" class="form-control" rows="3" placeholder="Any additional notes..."></textarea>
+                        <label class="form-label" for="productNotes">Notes (Optional)</label>
+                        <textarea id="productNotes" class="form-control" rows="3" placeholder="Additional notes..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
-                        💾 Save Product
+                    <button type="submit" class="btn btn-full btn-primary-action">
+                        Save Product
                     </button>
                 </form>
             </div>
@@ -100,10 +111,14 @@
         <!-- View Products Screen -->
         <div id="listScreen" class="screen">
             <div class="main-content">
-                <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
-                <h2 style="margin-bottom: 20px; color: #333;">All Products</h2>
+                <div class="screen-header">
+                    <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
+                    <div class="screen-title">All Products</div>
+                </div>
                 
-                <input type="text" class="search-box" id="productSearchBox" placeholder="🔍 Search products..." onkeyup="filterProducts()">
+                <div class="search-container">
+                    <input type="text" class="search-box" id="productSearchBox" placeholder="Search products..." onkeyup="filterProducts()">
+                </div>
                 
                 <div class="product-list" id="productList">
                     <!-- Products will be loaded here -->
@@ -114,8 +129,10 @@
         <!-- Edit Screen -->
         <div id="editScreen" class="screen">
             <div class="main-content">
-                <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
-                <h2 style="margin-bottom: 20px; color: #333;">Quick Edit Prices</h2>
+                <div class="screen-header">
+                    <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
+                    <div class="screen-title">Edit Prices</div>
+                </div>
                 
                 <div class="product-list" id="editProductList">
                     <!-- Products will be loaded here -->
@@ -126,8 +143,10 @@
         <!-- Suppliers Screen -->
         <div id="suppliersScreen" class="screen">
             <div class="main-content">
-                <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
-                <h2 style="margin-bottom: 20px; color: #333;">Suppliers</h2>
+                <div class="screen-header">
+                    <button class="back-btn" onclick="showScreen('homeScreen')">← Back</button>
+                    <div class="screen-title">Suppliers</div>
+                </div>
                 
                 <div class="product-list" id="suppliersList">
                     <!-- Suppliers will be loaded here -->
@@ -136,262 +155,13 @@
         </div>
     </div>
 
-    <script>
-        // Sample data structure
-        let products = JSON.parse(localStorage.getItem('shopProducts')) || [];
-        let suppliers = {};
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProducts();
-            updateStats();
-            
-            // Add form submission handler
-            document.getElementById('addProductForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                addProduct();
-            });
-
-            // Search functionality
-            document.getElementById('searchBox').addEventListener('keyup', function() {
-                const query = this.value.toLowerCase();
-                if (query.length > 0) {
-                    searchProducts(query);
-                }
-            });
-        });
-
-        // Show different screens
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-            
-            // Refresh data when showing certain screens
-            if (screenId === 'listScreen') loadProducts();
-            if (screenId === 'editScreen') loadEditProducts();
-            if (screenId === 'suppliersScreen') loadSuppliers();
-        }
-
-        // Image preview
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('imagePreview').innerHTML = 
-                        `<img src="${e.target.result}" class="image-preview" alt="Preview">
-                         <div>Tap to change image</div>`;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Add new product
-        function addProduct() {
-            const product = {
-                id: Date.now(),
-                name: document.getElementById('productName').value,
-                price: parseFloat(document.getElementById('productPrice').value),
-                supplier: document.getElementById('supplierName').value,
-                phone: document.getElementById('supplierPhone').value,
-                notes: document.getElementById('productNotes').value,
-                image: document.getElementById('imagePreview').querySelector('img')?.src || null,
-                dateAdded: new Date().toISOString(),
-                lastUpdated: new Date().toISOString()
-            };
-
-            products.push(product);
-            saveProducts();
-            updateStats();
-            
-            // Reset form
-            document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreview').innerHTML = 
-                `<div style="font-size: 3rem; margin-bottom: 10px;">📷</div>
-                 <div>Tap to add product image</div>`;
-            
-            alert('✅ Product added successfully!');
-            showScreen('homeScreen');
-        }
-
-        // Save products to localStorage
-        function saveProducts() {
-            localStorage.setItem('shopProducts', JSON.stringify(products));
-        }
-
-        // Load and display products
-        function loadProducts() {
-            const productList = document.getElementById('productList');
-            productList.innerHTML = '';
-
-            if (products.length === 0) {
-                productList.innerHTML = '<div style="text-align: center; color: #666; padding: 40px;">No products added yet. Click "Add New Product" to get started!</div>';
-                return;
-            }
-
-            products.forEach(product => {
-                const productElement = createProductElement(product);
-                productList.appendChild(productElement);
-            });
-        }
-
-        // Create product element
-        function createProductElement(product) {
-            const div = document.createElement('div');
-            div.className = 'product-item';
-            div.innerHTML = `
-                <img src="${product.image || 'https://via.placeholder.com/60x60?text=📦'}" class="product-image" alt="${product.name}">
-                <div class="product-details">
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-price">₦${product.price.toFixed(2)}</div>
-                    <div class="product-supplier">${product.supplier}</div>
-                </div>
-                <div class="product-actions">
-                    <button class="btn-small btn-edit" onclick="editProduct(${product.id})">✏️</button>
-                    <button class="btn-small btn-call" onclick="callSupplier('${product.phone}')" ${!product.phone ? 'disabled' : ''}>📞</button>
-                    <button class="btn-small btn-delete" onclick="deleteProduct(${product.id})">🗑️</button>
-                </div>
-            `;
-            return div;
-        }
-
-        // Update statistics
-        function updateStats() {
-            document.getElementById('totalProducts').textContent = products.length;
-            
-            const uniqueSuppliers = new Set(products.map(p => p.supplier));
-            document.getElementById('totalSuppliers').textContent = uniqueSuppliers.size;
-        }
-
-        // Search products
-        function searchProducts(query) {
-            const results = products.filter(product => 
-                product.name.toLowerCase().includes(query) ||
-                product.supplier.toLowerCase().includes(query)
-            );
-            
-            if (results.length > 0) {
-                showScreen('listScreen');
-                const productList = document.getElementById('productList');
-                productList.innerHTML = '';
-                results.forEach(product => {
-                    const productElement = createProductElement(product);
-                    productList.appendChild(productElement);
-                });
-            }
-        }
-
-        // Filter products in list view
-        function filterProducts() {
-            const query = document.getElementById('productSearchBox').value.toLowerCase();
-            const productItems = document.querySelectorAll('#productList .product-item');
-            
-            productItems.forEach(item => {
-                const productName = item.querySelector('.product-name').textContent.toLowerCase();
-                const supplierName = item.querySelector('.product-supplier').textContent.toLowerCase();
-                
-                if (productName.includes(query) || supplierName.includes(query)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        // Edit product
-        function editProduct(id) {
-            const product = products.find(p => p.id === id);
-            if (!product) return;
-
-            const newPrice = prompt(`Update price for ${product.name}:\nCurrent price: ₦${product.price.toFixed(2)}`, product.price);
-            
-            if (newPrice !== null && !isNaN(newPrice) && newPrice > 0) {
-                product.price = parseFloat(newPrice);
-                product.lastUpdated = new Date().toISOString();
-                saveProducts();
-                loadProducts();
-                alert('✅ Price updated successfully!');
-            }
-        }
-
-        // Call supplier
-        function callSupplier(phone) {
-            if (phone) {
-                window.open(`tel:${phone}`);
-            } else {
-                alert('No phone number available for this supplier.');
-            }
-        }
-
-        // Delete product
-        function deleteProduct(id) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                products = products.filter(p => p.id !== id);
-                saveProducts();
-                loadProducts();
-                updateStats();
-                alert('✅ Product deleted successfully!');
-            }
-        }
-
-        // Load products for editing
-        function loadEditProducts() {
-            const editList = document.getElementById('editProductList');
-            editList.innerHTML = '';
-
-            products.forEach(product => {
-                const div = document.createElement('div');
-                div.className = 'product-item';
-                div.innerHTML = `
-                    <img src="${product.image || 'https://via.placeholder.com/60x60?text=📦'}" class="product-image" alt="${product.name}">
-                    <div class="product-details">
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-price">₦${product.price.toFixed(2)}</div>
-                        <div class="product-supplier">${product.supplier}</div>
-                    </div>
-                    <div class="product-actions">
-                        <button class="btn-small btn-edit" onclick="editProduct(${product.id})">Edit Price</button>
-                    </div>
-                `;
-                editList.appendChild(div);
-            });
-        }
-
-        // Load suppliers
-        function loadSuppliers() {
-            const suppliersList = document.getElementById('suppliersList');
-            suppliersList.innerHTML = '';
-
-            const uniqueSuppliers = {};
-            products.forEach(product => {
-                if (!uniqueSuppliers[product.supplier]) {
-                    uniqueSuppliers[product.supplier] = {
-                        name: product.supplier,
-                        phone: product.phone,
-                        products: []
-                    };
-                }
-                uniqueSuppliers[product.supplier].products.push(product.name);
-            });
-
-            Object.values(uniqueSuppliers).forEach(supplier => {
-                const div = document.createElement('div');
-                div.className = 'product-item';
-                div.innerHTML = `
-                    <div style="width: 60px; height: 60px; background: #4CAF50; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-right: 15px;">👤</div>
-                    <div class="product-details">
-                        <div class="product-name">${supplier.name}</div>
-                        <div class="product-supplier">${supplier.products.length} product(s)</div>
-                        <div class="product-supplier">${supplier.phone || 'No phone'}</div>
-                    </div>
-                    <div class="product-actions">
-                        <button class="btn-small btn-call" onclick="callSupplier('${supplier.phone}')" ${!supplier.phone ? 'disabled' : ''}>Call</button>
-                    </div>
-                `;
-                suppliersList.appendChild(div);
-            });
-        }
-    </script>
+   
+       <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script src="gsap.js"></script>
+ 
 </body>
 </html>
